@@ -1,15 +1,17 @@
 services:
-  server: 
+  server:
     build: .
     restart: unless-stopped
     depends_on:
       - postgres_db
     env_file: .env.production
-    ports: 
+    ports:
       - "${PORT}:${PORT}"
+    volumes:
+      - ./uploads:/app/uploads
   postgres_db:
     restart: unless-stopped
     image: postgres:9.3
     env_file: .env.production
-    volumes: 
+    volumes:
       - ./data/prod:/var/lib/postgresql/data

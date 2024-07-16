@@ -1,0 +1,9 @@
+services:
+  postgres:
+    restart: unless-stopped
+    image: postgres:9.3
+    env_file: .env.dev
+    volumes: 
+      - ./data/dev:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"

@@ -1,4 +1,4 @@
-export const outlierDetection = (results: Record<string, any>[]): boolean  => {
+export const outlierDetection = (results: Record<string, any>[]): boolean => {
     const numberOfValues = results.length;
     const sorted = results.sort((a, b) => a.Value - b.Value);
     const lowerQuartileIndex = Math.floor((numberOfValues - 1) * 0.25);
@@ -10,13 +10,5 @@ export const outlierDetection = (results: Record<string, any>[]): boolean  => {
     const lowerLimit = lowerQuartile - (interQuartileRange * 1.5);
     const upperLimit = upperQuartile + (interQuartileRange * 1.5);
 
-    let hasOutlier = false;
-
-    results.forEach((num: Record<string, any>) => {
-        if (num["Value"] < lowerLimit || num["Value"] > upperLimit) {
-            hasOutlier = true;
-        }
-    });
-
-    return hasOutlier;
-}
+    return results.some((num: Record<string, any>) => num["Value"] < lowerLimit || num["Value"] > upperLimit);
+};

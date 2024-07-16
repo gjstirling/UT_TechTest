@@ -26,5 +26,9 @@ export function parseCsv(data: string): Promise<Record<string, any>[]> {
                 results.push(row);
             })
 
+            .on('end', () => {
+                unlinkSync(data);
+                resolve(results)
+            })
     })
 }

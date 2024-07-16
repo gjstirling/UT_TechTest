@@ -13,14 +13,18 @@ export function parseCsv(data: string): Promise<Record<string, any>[]> {
 
             .pipe(csvParser())
             .on('data', (row) => {
-                if(!isNaN(row["Value"])) {
-                    row["Value"] = parseFloat(row["Value"])
+                for (let key in row) {
+                    if (row.hasOwnProperty(key)) {
+                        let value = row[key];
+                        let parsedValue = parseFloat(value);
+
+                        if (!isNaN(parsedValue)) {
+                            row[key] = parsedValue;
+                        }
+                    }
                 }
-                results.push(row)
+                results.push(row);
             })
-            .on('end', () => {
-                unlinkSync(data);
-                resolve(results)
-            })
+
     })
 }

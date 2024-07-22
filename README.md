@@ -31,3 +31,13 @@ POSTGRES_USER=postgres
 POSTGRES_DB=urban_tide
 ```
 - `docker compose --env-file .env.production up`
+
+### View Uploaded Data: 
+ To verify the data is being stored you can run a bash shell inside the docker container to query the database: <br>
+```docker exec -it "{docker-db-reference}" bash```
+
+Connect to db:```psql -U postgres -d urban_tide``` <br>
+List tables: ```\dt``` <br>
+View uploads: ```SELECT * FROM data_uploads;```
+
+![table example](/images/example.png)

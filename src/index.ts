@@ -1,11 +1,9 @@
 import express from "express";
 import dotenv from "dotenv";
-import { v4 } from "uuid";
 
 import { outlierDetection } from "./services/outlierDetection";
 import { parseCsv } from "./services/parseCsv";
 import db from "./services/db";
-import { dataUploads } from "./schema";
 import { upload } from "./services/config";
 import {insert} from "./services/repository";
 
